@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
+import Tvseries from './components/Tvseries';
 
 const App = () => {
   const [weatherState, setWeatherState] = useState([]);
   useEffect(() => {
     async function FetchApi() {
-      let weatherApi = await fetch('http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json');
+      let weatherApi = await fetch('https://api.jikan.moe/v3/search/anime?q=naruto');
       let jsonApi = await weatherApi.json();
-      setWeatherState(jsonApi.dataseries);
+      setWeatherState(jsonApi.results);
       }
     FetchApi();
   }, []);
     console.log(weatherState);
   return (
     <div>
-
+<Tvseries tvseries={weatherState}/>
     </div>
   )
 }
